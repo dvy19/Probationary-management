@@ -23,6 +23,10 @@ app.get("/", (req, res) => {
     res.send("Server is running");
 });
 
+const authRoutes=require('./src/routes/authRoutes')
+
+app.use("/api/user", authRoutes);
+
 
 const PORT = process.env.PORT || 5000;
 
