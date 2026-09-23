@@ -42,9 +42,13 @@ const authRoutes=require('./src/routes/authRoutes')
 
 const taskRoutes=require("./src/routes/TaskRoutes")
 
+const adminRoutes=require('./src/routes/adminRoutes')
+
 app.use("/api/user", authRoutes);
 
-app.use("/api/admin" , taskRoutes)
+app.use("/api/task" , taskRoutes)
+
+app.use("/api/admin" , adminRoutes)
 
 
 const PORT = process.env.PORT || 5000;

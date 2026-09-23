@@ -6,6 +6,8 @@ const bcrypt=require("bcrypt")
 
 const jwt=require("jsonwebtoken")
 
+const Meetings=require('../models/admin')
+
 
 const register=async(req,res)=>{
 
@@ -205,4 +207,27 @@ const getProfile=async(req,res)=>{
         });
     }
 }
-module.exports={login , register , createProfile , getProfile}
+
+
+const getMeetings=async(req,res)=>{
+
+    try{
+
+        const meetings=await Meetings.find().sort({ date: -1 });
+        const totalMeets=await Meetings.countDocuments()
+
+        res.status(200).json({
+            message:"all meetings",
+            meetings,
+            totalMeets
+        })
+    }
+    catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            message: "Server error"
+        });
+    }
+}
+module.exports={login , register , createProfile , getProfile , getMeetings}

@@ -62,48 +62,34 @@ const userStats = new mongoose.Schema({
 
 });
 
-
-const attendance=new mongoose.Schema({
+const attendance = new mongoose.Schema({
 
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
+        required: true
     },
 
-    totalMeet: {
-        type: Number,
-        default: 0
+    meeting: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Meeting",
+        required: true
     },
 
-    meetAttended: {
-        type: Number,
-        default: 0
-    },
-
-    percentage: {
-        type: Number,
-        default: 0
-    },
-
-    date:Date,
-    day:String,
-    time:String,
-
-    mode:{
-        type:String,
-        enum:['offline' , 'online']
+    present: {
+        type: Boolean,
+        default: false
     }
 
+}, {
+    timestamps: true
+});
 
+const Attendance = mongoose.model("Attendance", attendance);
 
-
-
-})
-
-const Attendance=new mongoose.model("Attendance" , attendance)
 
 const UserStats=new mongoose.model("UserStats" , userStats)
 const User=new mongoose.model("User" , user)
 const UserDetails=new mongoose.model("UserDetails" , userDetails)
 
-module.exports={UserDetails , User , UserStats}
+module.exports={UserDetails , User , UserStats , Attendance}
