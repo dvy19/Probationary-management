@@ -14,7 +14,6 @@ const task=new mongoose.Schema({
     user:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User"
-
     },
 
     resources:{
@@ -29,13 +28,10 @@ const task=new mongoose.Schema({
         type:[String]
     },
 
-
-    
     level:{
         type:String,
         enum:['basic' , 'intermediate' , 'advance']
     },
-
 
     priority:{
         type:String,
@@ -44,8 +40,9 @@ const task=new mongoose.Schema({
 
     deadline:{
         type:Date
-    }
+    },
 
+    start:Date
 
 
     },

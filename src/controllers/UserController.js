@@ -134,4 +134,75 @@ const login=async(req,res)=>{
     }
 };
 
-module.exports={login , register}
+const createProfile=async(req,res)=>{
+
+    try{
+        const user=req.user.userId;
+
+        const {
+            name,
+             year, 
+             branch, 
+             dob, 
+             city, 
+             studentNo, 
+             linkedin,
+             leetcode, 
+             github,
+            sgpa, 
+            domain
+        } = req.body;
+
+        const userProfile=await UserDetails.create({
+            user,
+             name,
+             year, 
+             branch, 
+             dob, 
+             city, 
+             studentNo, 
+             linkedin,
+             leetcode, 
+             github,
+             sgpa, 
+             domain
+
+        })
+
+        res.status(201).json({
+            message:"profile created",
+            userProfile
+
+        })
+    }
+    catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            message: "Server error"
+        });
+    }
+}
+
+const getProfile=async(req,res)=>{
+
+    try{
+
+        const user=req.user.userId;
+
+        const profile=await UserDetails.findById({user:user})
+
+        res.status(200).json({
+            message:"profile rendered",
+            profile
+        })
+    }
+    catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            message: "Server error"
+        });
+    }
+}
+module.exports={login , register , createProfile , getProfile}

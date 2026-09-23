@@ -18,11 +18,12 @@ const createTask = async (req, res) => {
             level,
             priority,
             deadline,
+            start,
+            resources,
+            topics,
+            outcomes
         } = req.body;
 
-        const resources = JSON.parse(req.body.resources);
-        const topics = JSON.parse(req.body.topics);
-        const outcomes = JSON.parse(req.body.outcomes);
 
         const task = await Task.create({
             user,
@@ -37,7 +38,8 @@ const createTask = async (req, res) => {
             deadline,
             topics,
             resources,
-            outcomes
+            outcomes,
+            start
         });
 
         
@@ -82,6 +84,8 @@ const getTasks=async(req,res)=>{
     
 
 }
+
+
 
 module.exports = {createTask , getTasks};
 

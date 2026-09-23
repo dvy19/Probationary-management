@@ -24,9 +24,7 @@ const userDetails=new mongoose.Schema({
     sgpa:String,
     leetcode:String,
     linkedin:String,
-
-    profile:String
-
+    studentNo:String,
 })
 
 const userStats = new mongoose.Schema({
@@ -63,6 +61,46 @@ const userStats = new mongoose.Schema({
     }
 
 });
+
+
+const attendance=new mongoose.Schema({
+
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+    },
+
+    totalMeet: {
+        type: Number,
+        default: 0
+    },
+
+    meetAttended: {
+        type: Number,
+        default: 0
+    },
+
+    percentage: {
+        type: Number,
+        default: 0
+    },
+
+    date:Date,
+    day:String,
+    time:String,
+
+    mode:{
+        type:String,
+        enum:['offline' , 'online']
+    }
+
+
+
+
+
+})
+
+const Attendance=new mongoose.model("Attendance" , attendance)
 
 const UserStats=new mongoose.model("UserStats" , userStats)
 const User=new mongoose.model("User" , user)
