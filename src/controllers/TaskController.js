@@ -85,7 +85,30 @@ const getTasks=async(req,res)=>{
 
 }
 
+const getTaskById=async(req,res)=>{
+
+    try{
+
+        const taskId=req.params.taskId;
+
+        const task=await Task.findById({_id:taskId})
+
+        res.status(201).json({
+            task,
+            message:"task rendered"
+        })
+    }
+    catch (err) {
+        console.log(err);
+
+        res.status(500).json({
+            message: "error"
+        });
+    }
+
+}
 
 
-module.exports = {createTask , getTasks};
+
+module.exports = {createTask , getTasks , getTaskById};
 
