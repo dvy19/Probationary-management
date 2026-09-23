@@ -7,6 +7,62 @@ const bcrypt=require("bcrypt")
 const jwt=require("jsonwebtoken")
 
 
+const register=async(req,res)=>{
+
+    try{
+
+        const { name,role,email,password}=req.body;
+
+        console.log(password)
+
+        const hashPassword=await bcrypt.hash(password,10);
+
+        console.log(hashPassword)
+
+        const user=await User.create({
+            name,role,email,password:hashPassword
+        });
+
+        const accessToken = jwt.sign(
+            { userId: user._id },
+            process.env.JWT_SECRET,
+            { expiresIn: "15m" }
+        );
+
+
+        // Store token in HTTP-only cookie
+        res.cookie("accessToken", accessToken, {
+            httpOnly: true,
+            secure: false, // true in production with HTTPS
+            sameSite: "lax",
+            maxAge: 15 * 60 * 1000
+        });
+       
+
+
+        res.status(200).json({
+            message:"user registered successfully",
+            user:{
+                email:user.email,
+                role:user.role,
+                id:user._id,
+                name:user.name
+            },
+            token:accessToken
+        })
+
+    }
+    catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            message: "Server error"
+        });
+    }
+
+}
+
+
 const login=async(req,res)=>{
 
     try{
@@ -78,4 +134,4 @@ const login=async(req,res)=>{
     }
 };
 
-module.exports=login
+module.exports={login , register}

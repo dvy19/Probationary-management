@@ -13,6 +13,9 @@ app.use(express.json());
 
 //app.use(cookieParser())
 
+
+const connectDB = require('./src/config/db');
+
 const http=require("http")
 
 
@@ -25,13 +28,17 @@ app.get("/", (req, res) => {
 
 const authRoutes=require('./src/routes/authRoutes')
 
+const taskRoutes=require("./src/routes/TaskRoutes")
+
 app.use("/api/user", authRoutes);
+
+app.use("/api/admin" , taskRoutes)
 
 
 const PORT = process.env.PORT || 5000;
 
 const startServer = async () => {
-    //await connectDB();
+    await connectDB();
 
     //await connectRedis();
 
