@@ -11,6 +11,12 @@ const task=new mongoose.Schema({
 
     isActive:Boolean,
 
+    user:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User"
+
+    },
+
     resources:{
         type:[String],
     },

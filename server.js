@@ -26,6 +26,18 @@ app.get("/", (req, res) => {
     res.send("Server is running");
 });
 
+
+app.use(cors({
+  origin: ["http://localhost:5173" , "http://localhost:5174" , "http://localhost:4173"],
+  credentials: true
+}));
+
+// Health check
+app.get("/api/health", (req, res) => {
+    res.status(200).json({ status: "OK" });
+});
+
+
 const authRoutes=require('./src/routes/authRoutes')
 
 const taskRoutes=require("./src/routes/TaskRoutes")

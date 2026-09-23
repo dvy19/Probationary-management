@@ -29,8 +29,43 @@ const userDetails=new mongoose.Schema({
 
 })
 
+const userStats = new mongoose.Schema({
 
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        unique: true
+    },
+
+    totalTasks: {
+        type: Number,
+        default: 0
+    },
+
+    tasksCompleted: {
+        type: Number,
+        default: 0
+    },
+
+    pendingTasks: {
+        type: Number,
+        default: 0
+    },
+
+    totalMeet: {
+        type: Number,
+        default: 0
+    },
+
+    meetAttended: {
+        type: Number,
+        default: 0
+    }
+
+});
+
+const UserStats=new mongoose.model("UserStats" , userStats)
 const User=new mongoose.model("User" , user)
 const UserDetails=new mongoose.model("UserDetails" , userDetails)
 
-module.exports={UserDetails , User}
+module.exports={UserDetails , User , UserStats}

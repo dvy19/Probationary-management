@@ -1,9 +1,14 @@
 
 const express=require("express")
-const createTask=require('../controllers/TaskController')
+const {createTask , getTasks}=require('../controllers/TaskController')
 
 const router=express.Router()
 
-router.post('/create-task' , createTask)
+const authMiddleware=require("../middleware/authMiddleware")
+
+
+
+router.post('/create-task' , authMiddleware, createTask)
+router.get('/get-tasks' , authMiddleware ,getTasks )
 
 module.exports=router
