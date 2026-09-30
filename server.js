@@ -8,6 +8,8 @@ const app = express();
 
 app.use(express.json());
 
+require('./src/config/firebase')
+
 
 const cookieParser = require("cookie-parser");
 
