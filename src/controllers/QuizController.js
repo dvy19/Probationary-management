@@ -4,6 +4,9 @@ const createQuiz = async (req, res) => {
 
     try {
 
+        console.log(req.body)
+
+
         const {
             title,
             description,
@@ -15,7 +18,8 @@ const createQuiz = async (req, res) => {
             domain
         } = req.body;
 
-        const admin = req.user.userId;
+
+        
 
         // Check questions
         if (!questions || questions.length !== 5) {
@@ -65,9 +69,10 @@ const createQuiz = async (req, res) => {
             totalQuestions: questions.length,
             questions,
             date,
-            admin,
             isActive
         });
+
+        console.log("quiz")
 
         return res.status(201).json({
             message: "Quiz is created",
@@ -75,6 +80,8 @@ const createQuiz = async (req, res) => {
         });
 
     } catch (error) {
+
+        console.log(error)
 
         return res.status(500).json({
             message: "Error creating quiz",

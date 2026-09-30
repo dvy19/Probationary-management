@@ -72,7 +72,6 @@ const quizSchema = new mongoose.Schema({
 
     date: {
         type: Date,
-        required: true
     },
 
     domain: {
@@ -81,11 +80,7 @@ const quizSchema = new mongoose.Schema({
         trim: true
     },
 
-    admin: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true
-    }
+   
 
 }, {
     timestamps: true

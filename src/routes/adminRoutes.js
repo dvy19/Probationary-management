@@ -11,5 +11,6 @@ const authMiddleware=require('../middleware/authMiddleware')
 
 router.post('/create-meet' , authMiddleware, createMeeting)
 
-router.post('/create-quiz' , authMiddleware , createQuiz )
+router.post('/create-quiz' , createQuiz )
+
 module.exports=router
