@@ -7,7 +7,6 @@ const createMeeting=async(req,res)=>{
 
         const user=req.user.userId;
 
-
         const{
             title,
             date,
@@ -42,7 +41,7 @@ const createMeeting=async(req,res)=>{
     }
 
 }
+ 
 
 
-
-module.exports={createMeeting}
+module.exports={createMeeting }
