@@ -9,7 +9,8 @@ const {
     register,
     createProfile,
     getMeetings,
-    getProfile
+    getProfile,
+    saveFCMTokens
 } = require("../controllers/UserController");
 
 
@@ -18,6 +19,8 @@ router.post("/register" , register)
 router.post('/create-profile' , authMiddleware, createProfile)
 router.get('/get-profile' , authMiddleware, getProfile)
 router.get('/get-meetings' , authMiddleware , getMeetings)
+
+router.post('/save-tokens' ,saveFCMTokens )
 
 
 

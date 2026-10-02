@@ -12,6 +12,11 @@ const userDetails=new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:"User"
     },
+
+    fcmTokens: {
+        type: [String],
+        default: []
+    },
     
     name:String,
     year:String,

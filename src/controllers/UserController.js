@@ -186,6 +186,47 @@ const createProfile=async(req,res)=>{
     }
 }
 
+
+const saveFCMTokens=async(req,res)=>{
+
+    try{
+
+        const user=req.user.userId;
+
+        
+         const { token } = req.body;
+
+        if (!token) {
+            return res.status(400).json({
+                message: "FCM token is required"
+            });
+        }
+
+        await UserDetails.findOneAndUpdate(
+            { user: user },
+            {
+                $addToSet: {
+                    fcmTokens: token
+                }
+            },
+            {
+                new: true
+            }
+        );
+
+        res.status(200).json({
+            message: "FCM token saved successfully"
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: error.message
+        });
+
+    }
+};
+
 const getProfile=async(req,res)=>{
 
     try{
@@ -230,4 +271,4 @@ const getMeetings=async(req,res)=>{
         });
     }
 }
-module.exports={login , register , createProfile , getProfile , getMeetings}
+module.exports={login , register , createProfile , getProfile , getMeetings  , saveFCMTokens}
