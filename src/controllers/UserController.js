@@ -195,6 +195,7 @@ const saveFCMTokens=async(req,res)=>{
 
         
          const { token } = req.body;
+         console.log(token)
 
         if (!token) {
             return res.status(400).json({
@@ -223,6 +224,8 @@ const saveFCMTokens=async(req,res)=>{
         res.status(500).json({
             message: error.message
         });
+
+        console.log(error.message)
 
     }
 };
