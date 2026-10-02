@@ -20,7 +20,7 @@ router.post('/create-profile' , authMiddleware, createProfile)
 router.get('/get-profile' , authMiddleware, getProfile)
 router.get('/get-meetings' , authMiddleware , getMeetings)
 
-router.post('/save-tokens' ,saveFCMTokens )
+router.post('/save-tokens' , authMiddleware, saveFCMTokens )
 
 
 

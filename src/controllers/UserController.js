@@ -193,6 +193,7 @@ const saveFCMTokens=async(req,res)=>{
 
         const user=req.user.userId;
 
+        console.log(user)
         
          const { token } = req.body;
          console.log(token)
